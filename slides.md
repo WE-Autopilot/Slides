@@ -25,7 +25,7 @@ imageAlt: Pen sketch of the club's golf cart in a street with detection boxes
 
 <!--
 Speaker notes go in an HTML comment at the end of a slide.
-Press P in the browser for presenter mode to see them.
+Open http://localhost:3030/presenter/ (presenter mode) to see them.
 -->
 
 ---
