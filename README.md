@@ -34,7 +34,7 @@ Every deck in this repo uses the club's **"Sketchbook"** template. It looks like
 
 | Path | What it is |
 | --- | --- |
-| `agm2026.md` | The 2026/27 AGM deck (19 slides). The best real example of the template. |
+| `agm2026.md` | The 2026/27 AGM deck (17 slides). The best real example of the template. |
 | `slides.md` | A short starter deck with one example of every layout, using placeholder text. |
 | `layouts/` | The slide layouts: `cover`, `default`, `two-cols`, `section`, `highlights`, `flow`, `cards`, `team`. |
 | `components/` | The building blocks: `SketchBox`, `SketchFrame`, `Note`, `Num`, `SketchArrow`, `Bracket`, `Doodle`, `CartDiagram`. |
@@ -155,28 +155,26 @@ The 2026/27 deck (`agm2026.md`), with what you'd change when reusing each slide.
 
 | # | Slide | Layout | What to update when reusing it |
 | --- | --- | --- | --- |
-| 1 | WE AutoPilot: Annual General Meeting | **cover** | The `## subtitle` and handwritten tagline. The sketch is `public/photos/golf_cart_sketch-hd.jpg`. |
-| 2 | The founders | default | Three `SketchFrame` headshots in `public/photos/leads/`, with names, roles and team doodles. |
-| 3 | Our club | default | Mission, values and vision (rarely changes). |
-| 4 | Level 4 autonomy | default | The L0–L5 boxes, the current-year target, and the Waymo photo with drawn detection boxes. |
-| 5 | 2024/25 highlights | **highlights** | Five photos and matching notes. |
-| 6 | 2025/26 highlights | **highlights** | Four photos and matching notes. For a new year, copy this block and change the year, photos and notes. |
-| 7 | Our largest sponsor yet | default | The sponsor's logo (`public/sponsors/`), the four numbered points and the thank-you note. |
-| 8 | What we've built so far | default | Perception result images and the looping planning video (`public/videos/`). |
-| 9 | The road to Level 4 | **flow** | One box per year. Move `mark: true` and the "you are here" arrow to the current year. |
-| 10 | A self-driving golf cart | default | The three stat boxes and the `CartDiagram` sketch. |
-| 11 | How WEAP is built | **section** | Section break. |
-| 12 | WEAP components | **flow** | The autonomy pipeline, with brackets for which team owns which step. |
-| 13 | Technical team | **cards** | One card per team, with each lead's headshot, name and role under `people:`. |
-| 14–16 | Perception / Mapping & localization / Planning & control | **team** | Each team's steps, key hardware, tools, skills and industry note. Update the tools every year. |
-| 17 | What every team feeds into | **cards** | The shared systems, with the operating states in the side column. |
-| 18 | Business team | **cards** | Finance and Communications & Marketing cards, with leads. |
-| 19 | Join the ride | **cards** | Socials, and the Discord QR in `public/qr/discord.png`. |
+| 1 | WE AutoPilot: Annual General Meeting | **cover** | Subtitle and cleaned cover illustration (`public/photos/golf-cart-cover-signs-fixed.png`). |
+| 2 | Our club | default | Mission, values and vision. |
+| 3 | Level 4 autonomy | default | Current-year target and autonomy levels. |
+| 4 | 2024/25 highlights | **highlights** | Photos and notes, including the MNIST Workshop. |
+| 5 | 2025/26 highlights | **highlights** | Photos and notes. |
+| 6 | Sponsors | default | QNX, Notion, SOLIDWORKS and Roboshop. |
+| 7 | What we've built so far | default | Perception images and planning video. |
+| 8 | The road to Level 4 | **flow** | Four milestones and the current-year marker. |
+| 9 | A self-driving golf cart | default | Vehicle and project overview. |
+| 10 | How WEAP is built | **section** | Section break. |
+| 11 | WEAP components | default | `components/AutonomyStack.vue`: ADCU, VCU and vehicle. |
+| 12 | Technical team | **cards** | Hiring guide for five technical teams and non-tech teams. |
+| 13–15 | Perception / Mapping & localization / Planning & control | **team** | Short recruitment overview of work, tools and skills. |
+| 16 | Planned events | **cards** | Team Olympics, Development Showcase, and BBQ & Awards. |
+| 17 | Join the ride | **cards** | Hiring invitation, socials and Discord QR. |
 
 **Common reuse jobs:**
 
-- **New executives or leads:** add their photo to `public/photos/leads/`, update `src`, `name` and `role` in the `people:` lists (slides 13 and 18) and in the founders' `SketchFrame`s (slide 2). If a face is cut off, adjust `pos:` (for example `pos: center 25%`).
-- **A new year of highlights:** copy slide 6's block and change the title, `photos:`, `notes:` and the `next:` teaser.
+- **New executives or leads:** add their photo to `public/photos/leads/`, update `src`, `name` and `role` in the `people:` lists (slide 12). If a face is cut off, adjust `pos:` (for example `pos: center 25%`).
+- **A new year of highlights:** copy slide 5's block and change the title, `photos:`, `notes:` and the `next:` teaser.
 - **A new sponsor:** put their logo in `public/sponsors/` (SVG if possible), then copy slide 7 and update the points. Keep the logo in its real brand colours.
 - **A new results video:** see [Looping videos](#looping-videos) for how to trim and crop it.
 

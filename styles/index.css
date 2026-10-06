@@ -658,3 +658,35 @@
   font-weight: 700;
   background: var(--lavender);
 }
+
+/* Recruitment overview: fewer points, readable from the audience. */
+.sk-team-brief .sk-team-left,
+.sk-team-brief .sk-team-right { top: 180px; }
+.sk-team-brief .sk-team-step { padding: 18px 16px !important; }
+.sk-team-brief .sk-team-step b { font-size: 22px; }
+.sk-team-brief .sk-team-step-text { font-size: 18px; margin-top: 8px; }
+.sk-team-brief .sk-team-tool { font-size: 17px; }
+.sk-team-brief .sk-team-skills { gap: 16px; margin-top: 16px; }
+.sk-team-brief .sk-team-skills .sk-note-text { font-size: 23px; }
+
+.sk-agm-cover .sk-cover-art {
+  right: 8px; top: 100px; width: 540px; height: 420px; object-fit: contain;
+}
+
+.sk-hiring .sk-card { gap: 12px; }
+.sk-hiring .sk-card h3 { font-size: 19px !important; }
+.sk-hiring .sk-card-head { align-items: flex-start; }
+.sk-hiring .sk-card-text { line-height: 1.35; }
+.sk-event-preview .sk-card { gap: 24px; }
+.sk-event-preview .sk-card h3 { font-size: 22px !important; }
+.sk-event-preview .sk-card-text { line-height: 1.45; }
+.sk-event-preview .sk-card-tools { font-size: 18px; }
+
+.sponsor-logos { display: grid; grid-template-columns: 1fr 1fr; gap: 38px 62px; margin-top: 36px; }
+.sponsor-logos > div { height: 120px; display: flex; justify-content: center; align-items: center; gap: 20px; }
+.sponsor-logos img { object-fit: contain; }
+.sponsor-qnx { width: 340px; height: 180px; }
+.sponsor-notion { width: 90px; height: 90px; }
+.sponsor-name { font-size: 34px; font-weight: 700; }
+.sponsor-solidworks { width: 340px; height: 110px; }
+.sponsor-robotshop { width: 350px; height: 117px; }
