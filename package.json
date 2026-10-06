@@ -1,0 +1,19 @@
+{
+  "name": "we-autopilot",
+  "type": "module",
+  "private": true,
+"scripts": {
+    "dev": "slidev agm2026.md --open",
+    "build": "slidev build agm2026.md",
+    "export": "slidev export agm2026.md",
+    "dev:agm": "slidev agm2026.md --open",
+    "build:agm": "slidev build agm2026.md",
+    "export:agm": "slidev export agm2026.md --format pdf"
+  },
+  "dependencies": {
+    "@slidev/cli": "^53.0.0",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.33"
+  }
+}

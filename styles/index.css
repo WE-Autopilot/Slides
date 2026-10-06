@@ -1,0 +1,489 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* ==========================================================================
+   WE AutoPilot — AGM deck theme (used by agm2026.md)
+   Black & white like the logo, "road sign" yellow as the hero accent,
+   and one neon colour per team. Everything is namespaced with `ap-`.
+   ========================================================================== */
+
+:root {
+  --ap-ink: #09090c;
+  --ap-surface: #121217;
+  --ap-surface-2: #191920;
+  --ap-line: rgba(255, 255, 255, 0.1);
+  --ap-paper: #f6f4ee;
+  --ap-mute: #a9a7b3;
+  --ap-dim: #6f6d7a;
+
+  --ap-yellow: #ffd60a;
+  --ap-violet: #a58bff;
+  --ap-pink: #ff4fa3;
+  --ap-cyan: #2ee6ff;
+  --ap-lime: #b6f23a;
+
+  /* team colours */
+  --ap-perception: var(--ap-cyan);
+  --ap-mapping: var(--ap-violet);
+  --ap-planning: var(--ap-pink);
+  --ap-web: var(--ap-lime);
+  --ap-business: var(--ap-yellow);
+
+  --ap-sans: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --ap-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+}
+
+/* ---------- slide canvas ---------- */
+
+.slidev-layout.ap {
+  position: relative;
+  isolation: isolate;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--ap-ink);
+  color: var(--ap-paper);
+  font-family: var(--ap-sans);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+/* faint occupancy-grid dots */
+.slidev-layout.ap::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.085) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 60% 40%, #000 20%, transparent 85%);
+  mask-image: radial-gradient(ellipse 80% 80% at 60% 40%, #000 20%, transparent 85%);
+  pointer-events: none;
+}
+
+.ap p { margin: 0; }
+.ap img { max-width: none; }
+
+/* colour glow blobs — set --c */
+.ap-glow {
+  position: absolute;
+  z-index: 0;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--c, var(--ap-violet)) 70%, transparent) 0%, transparent 65%);
+  opacity: 0.45;
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+/* ---------- layout layers ---------- */
+
+.ap-chrome {
+  position: absolute;
+  z-index: 5;
+  top: 20px;
+  left: 40px;
+  right: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ap-body {
+  position: absolute;
+  z-index: 2;
+  top: 62px;
+  left: 40px;
+  right: 40px;
+  bottom: 30px;
+}
+
+.ap-full {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+}
+
+.ap-logo {
+  height: 28px;
+  width: auto;
+  filter: invert(1);
+}
+
+.ap-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--ap-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ap-mute);
+}
+
+.ap-kicker b {
+  color: var(--ap-ink);
+  background: var(--c, var(--ap-yellow));
+  padding: 2px 6px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- type ---------- */
+
+.ap .ap-h1,
+.ap .ap-display {
+  margin: 0;
+  font-family: var(--ap-sans);
+  font-stretch: 125%;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.92;
+  color: var(--ap-paper);
+}
+
+.ap .ap-h1 { font-size: 42px; }
+
+.slidev-layout.ap .ap-sub {
+  margin-top: 10px;
+  font-size: 15px;
+  color: var(--ap-mute);
+}
+
+.ap-label {
+  font-family: var(--ap-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--c, var(--ap-mute));
+}
+
+.ap-c { color: var(--c); }
+
+.ap-mark {
+  background: var(--c, var(--ap-yellow));
+  color: var(--ap-ink);
+  padding: 0 0.14em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.ap-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--c, var(--ap-paper));
+}
+
+.ap-code {
+  display: inline-block;
+  font-family: var(--ap-mono);
+  font-size: 13px;
+  color: var(--ap-yellow);
+  border: 1px solid color-mix(in srgb, var(--ap-yellow) 55%, transparent);
+  background: color-mix(in srgb, var(--ap-yellow) 8%, transparent);
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+/* ---------- components ---------- */
+
+.ap-tag {
+  display: inline-block;
+  font-family: var(--ap-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--ap-ink);
+  background: var(--c, var(--ap-yellow));
+  padding: 4px 7px;
+}
+
+.ap-card {
+  background: var(--ap-surface);
+  border: 1px solid var(--ap-line);
+  border-radius: 14px;
+}
+
+.ap-pill {
+  display: inline-flex;
+  align-items: center;
+  font-stretch: 125%;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  color: var(--ap-ink);
+  background: var(--c, var(--ap-yellow));
+  padding: 9px 16px;
+  border-radius: 999px;
+}
+
+.ap-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--ap-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ap-paper);
+  border: 1px solid var(--ap-line);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 5px 9px;
+  border-radius: 6px;
+}
+
+.ap-chip::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c, var(--ap-yellow));
+}
+
+/* Detection bounding box — wrap any image. Set --c for the colour. */
+.ap-bbox {
+  position: relative;
+  display: block;
+  padding: 7px;
+  --l: 20px;
+  --t: 3px;
+}
+
+.ap-bbox > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ap-bbox::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 1px solid color-mix(in srgb, var(--c, var(--ap-yellow)) 40%, transparent);
+  pointer-events: none;
+}
+
+.ap-bbox::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--c, var(--ap-yellow)) 0 0) top left / var(--l) var(--t),
+    linear-gradient(var(--c, var(--ap-yellow)) 0 0) top left / var(--t) var(--l),
+    linear-gradient(var(--c, var(--ap-yellow)) 0 0) top right / var(--l) var(--t),
+    linear-gradient(var(--c, var(--ap-yellow)) 0 0) top right / var(--t) var(--l),
+    linear-gradient(var(--c, var(--ap-yellow)) 0 0) bottom left / var(--l) var(--t),
+    linear-gradient(var(--c, var(--ap-yellow)) 0 0) bottom left / var(--t) var(--l),
+    linear-gradient(var(--c, var(--ap-yellow)) 0 0) bottom right / var(--l) var(--t),
+    linear-gradient(var(--c, var(--ap-yellow)) 0 0) bottom right / var(--t) var(--l);
+  background-repeat: no-repeat;
+}
+
+.ap-bbox > .ap-tag {
+  position: absolute;
+  z-index: 1;
+  left: -1px;
+  bottom: 100%;
+}
+
+/* black & white headshots, to sit with the logo */
+.ap-bw { filter: grayscale(1) contrast(1.08) brightness(1.02); }
+
+/* bare overlay box (no image) for photos with HUD detections */
+.ap-detect {
+  position: absolute;
+  border: 2px solid var(--c, var(--ap-cyan));
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.35), 0 0 18px color-mix(in srgb, var(--c, var(--ap-cyan)) 45%, transparent);
+}
+
+.ap-detect > .ap-tag {
+  position: absolute;
+  left: -2px;
+  bottom: 100%;
+}
+
+/* photo tile with caption tag */
+.ap-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--ap-line);
+  background: var(--ap-surface);
+}
+
+.ap-tile > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ap-tile::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.55));
+  pointer-events: none;
+}
+
+.ap-tile > .ap-tag {
+  position: absolute;
+  z-index: 1;
+  left: 10px;
+  bottom: 10px;
+}
+
+/* quote card used on the team slides */
+.ap-quote {
+  position: relative;
+  padding: 22px 24px 22px 26px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--c) 14%, var(--ap-surface)) 0%, var(--ap-surface) 70%);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, transparent);
+  font-size: 19px;
+  line-height: 1.42;
+  color: var(--ap-paper);
+}
+
+.ap-quote::before {
+  content: '“';
+  position: absolute;
+  top: -30px;
+  left: 14px;
+  font-family: Georgia, serif;
+  font-size: 84px;
+  line-height: 1;
+  color: var(--c);
+}
+
+.ap-quote b { color: var(--c); font-weight: 800; }
+
+/* person block under a headshot */
+.ap-name {
+  font-weight: 800;
+  font-size: 19px;
+  line-height: 1.15;
+  color: var(--ap-paper);
+}
+
+.ap-role {
+  margin-top: 3px;
+  font-family: var(--ap-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c, var(--ap-mute));
+}
+
+/* autonomy pipeline steps (team slides) */
+.ap-steps {
+  display: flex;
+  gap: 4px;
+  font-family: var(--ap-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ap-steps span {
+  flex: 1;
+  padding: 7px 0 0;
+  border-top: 3px solid rgba(255, 255, 255, 0.14);
+  color: var(--ap-dim);
+}
+
+.ap-steps span.on {
+  border-color: var(--c);
+  color: var(--c);
+  font-weight: 700;
+}
+
+/* ---------- road + hazard decorations ---------- */
+
+.ap-road {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30px;
+  overflow: hidden;
+  background: #141419;
+  border-top: 2px solid rgba(255, 255, 255, 0.55);
+}
+
+.ap-road::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: -80px;
+  height: 4px;
+  margin-top: -2px;
+  background: repeating-linear-gradient(90deg, var(--ap-yellow) 0 40px, transparent 40px 80px);
+  animation: ap-drive 1.1s linear infinite;
+}
+
+@keyframes ap-drive {
+  to { transform: translateX(-80px); }
+}
+
+.ap-hazard {
+  background: repeating-linear-gradient(-45deg, var(--ap-yellow) 0 10px, var(--ap-ink) 10px 20px);
+}
+
+/* LiDAR sweep on the title slide */
+.ap-sweep {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, color-mix(in srgb, var(--ap-violet) 55%, transparent), transparent 70deg);
+  animation: ap-spin 5s linear infinite;
+}
+
+@keyframes ap-spin {
+  to { transform: rotate(360deg); }
+}
+
+.ap-pulse { animation: ap-pulse 1.6s ease-in-out infinite; }
+
+@keyframes ap-pulse {
+  50% { opacity: 0.35; }
+}
+
+/* social rows on the closing slide */
+.ap-social {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ap-paper);
+}
+
+.ap-social > i {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  font-style: normal;
+  font-size: 20px;
+  color: var(--ap-ink);
+  background: var(--c, var(--ap-yellow));
+}
+
+/* the default theme fades and pulls up any <p> right after an <h1> */
+.slidev-layout.ap h1 + p {
+  opacity: 1;
+  margin-bottom: 0;
+}
+
+.ap-pill { justify-content: center; }
