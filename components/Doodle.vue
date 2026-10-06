@@ -5,7 +5,7 @@
   <Doodle name="eye" :size="36" />
 
   eye · map-pin · steering-wheel · wrench · lidar · cone · browser · coins ·
-  megaphone · calendar · camera · briefcase · chat
+  megaphone · calendar · camera · briefcase · chat · shield · log · path · alert
 -->
 <script setup lang="ts">
 defineProps({
@@ -112,6 +112,30 @@ defineProps({
         <circle cx="8.5" cy="11.5" r=".6" fill="var(--purple)" stroke="var(--purple)" />
         <circle cx="12.5" cy="11.5" r=".6" fill="var(--purple)" stroke="var(--purple)" />
         <circle cx="16.5" cy="11.5" r=".6" fill="var(--purple)" stroke="var(--purple)" />
+      </template>
+
+      <template v-else-if="name === 'shield'">
+        <path d="M12 2.5 4 5.5v6c0 5 3.4 8.6 8 10 4.6-1.4 8-5 8-10v-6z" fill="var(--lavender)" />
+        <path d="m8.5 12 2.4 2.4 4.6-4.8" stroke="var(--purple)" stroke-width="2" />
+      </template>
+
+      <template v-else-if="name === 'log'">
+        <path d="M14 2.5H6a1.5 1.5 0 0 0-1.5 1.5v16A1.5 1.5 0 0 0 6 21.5h12a1.5 1.5 0 0 0 1.5-1.5V8z" fill="var(--paper)" />
+        <path d="M14 2.5V8h5.5z" fill="var(--lavender)" />
+        <path d="M8 12h8M8 15.5h8M8 19h5" stroke="var(--purple)" />
+      </template>
+
+      <template v-else-if="name === 'path'">
+        <circle cx="5" cy="19" r="2.5" fill="var(--lavender)" />
+        <path d="M7 17.5c3-1.5 2-6 5.5-7s5.5-2 6.5-5" stroke="var(--purple)" stroke-dasharray="2 2.5" />
+        <path d="m16.5 3.5 3 1.5-1 3.2" />
+        <path d="M13.5 18.5h7M17 15v7" stroke="var(--lilac)" />
+      </template>
+
+      <template v-else-if="name === 'alert'">
+        <path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" fill="var(--lavender)" />
+        <path d="M12 9v4.5" stroke="var(--purple)" stroke-width="2.2" />
+        <circle cx="12" cy="17" r=".7" fill="var(--purple)" stroke="var(--purple)" />
       </template>
     </g>
   </svg>
