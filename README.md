@@ -4,6 +4,8 @@ The club's slide decks, built with [Slidev](https://sli.dev). You write slides i
 
 Every deck in this repo uses the club's **"Sketchbook"** template. It looks like a whiteboard after a good design meeting: wobbly pen outlines, lavender marker fills, handwritten notes, and photos stuck on with drawn frames. It's the template used for the 2026/27 AGM.
 
+**▶ View the AGM deck online: <https://we-autopilot.github.io/Slides/>**
+
 ![Four slides from the 2026/27 AGM deck: the title slide, the QNX sponsor slide, "What we've built so far" with a looping video, and the Perception team slide](docs/agm-preview.png)
 
 ## Contents
@@ -22,7 +24,7 @@ Every deck in this repo uses the club's **"Sketchbook"** template. It looks like
 8. [Layout reference](#layout-reference)
 9. [Component reference](#component-reference)
 10. [Images, video and QR codes](#images-video-and-qr-codes)
-11. [Presenting, exporting and hosting](#presenting-exporting-and-hosting)
+11. [Presenting, exporting and hosting](#presenting-exporting-and-hosting) (live at [we-autopilot.github.io/Slides](https://we-autopilot.github.io/Slides/))
 12. [How the template works](#how-the-template-works)
 13. [Troubleshooting](#troubleshooting)
 14. [Contributing](#contributing)
@@ -40,7 +42,9 @@ Every deck in this repo uses the club's **"Sketchbook"** template. It looks like
 | `global-top.vue` | The two SVG filters that make outlines look hand-drawn. |
 | `setup/shiki.ts` | The light code-highlighting theme. |
 | `public/` | Images, logo, QR codes, sponsor logos and videos used by the decks. |
-| `netlify.toml`, `vercel.json` | Ready-made settings for hosting a deck as a website. |
+| `.github/workflows/deploy-pages.yml` | Publishes the AGM deck to GitHub Pages on every push to `main`. |
+| `vite.config.ts` | A one-line build fix (see [Troubleshooting](#troubleshooting)). |
+| `netlify.toml`, `vercel.json` | Settings for hosting on Netlify or Vercel instead, if you ever want to. |
 | `docs/` | Images used in this README. |
 
 Any `.md` deck in the repo root gets the layouts, components and styles automatically. Nothing needs to be imported or copied.
@@ -519,9 +523,25 @@ Put them in a `SketchFrame` with `fit="contain"`, at least about 200 px on the s
 - **What doesn't export:** videos show their `poster` image, and click animations appear in their final state.
 - **Sharing:** exports are git-ignored. Share PDFs through the club Drive or Discord.
 
-### Hosting a deck as a website
+### Hosting on GitHub Pages
 
-`netlify.toml` and `vercel.json` are already configured. Connect the GitHub repo on [Netlify](https://www.netlify.com) or [Vercel](https://vercel.com); every push to `main` runs `npm run build` and publishes the deck in `dist/`. The `build` script decides which deck is published, so change it in `package.json` to host a different one.
+The AGM deck is published at **<https://we-autopilot.github.io/Slides/>**. Anyone can open it in a browser, on any device, with nothing installed, and links to a single slide work (for example `…/Slides/7`, or presenter mode at `…/Slides/presenter/`).
+
+**How it works:** `.github/workflows/deploy-pages.yml` runs on every push to `main`. It installs the dependencies, builds the deck with `npx slidev build agm2026.md --base /Slides/`, and publishes the result. It takes about a minute; follow it in the repo's **Actions** tab.
+
+**One-time setup** (a repo admin does this once): **Settings → Pages → Build and deployment → Source: GitHub Actions**. Then push to `main`, or open **Actions → Deploy slides to GitHub Pages → Run workflow**.
+
+**To publish a different deck**, change `DECK: agm2026.md` near the top of the workflow file. Pages hosts one deck per repo at this address. To host several, build each into its own subfolder (`--base /Slides/workshop/ --out dist/workshop`) in the same workflow.
+
+**To test a Pages build locally** before pushing:
+
+```bash
+npx slidev build agm2026.md --base /Slides/
+```
+
+The output in `dist/` expects to be served from `/Slides/`, so test day-to-day changes with `npm run dev` instead.
+
+**Netlify or Vercel instead:** `netlify.toml` and `vercel.json` are also configured. Connect the repo there and every push to `main` runs `npm run build`, which publishes the deck named in the `build` script in `package.json`.
 
 ## How the template works
 
@@ -556,6 +576,9 @@ You only need this section if you're changing the template itself.
 | Image doesn't show | The path must start with `/` and the file must be inside `public/`; `/photos/x.jpg` means `public/photos/x.jpg`. Paths are case-sensitive. |
 | Video doesn't autoplay | Add `muted` and `playsinline`. Use H.264 MP4 (the ffmpeg command above). |
 | Something's cut off at the bottom | The slide is too full. Trim the text or split the slide; don't shrink text below ~12 px. |
+| `slidev build` fails with `[lightningcss minify] Invalid token in pseudo element` | A bug in Slidev 53 combined with UnoCSS 66. `vite.config.ts` turns off CSS minification to get around it; don't delete that file unless a newer Slidev fixes it. |
+| The GitHub Pages site is blank, or images are missing | The build needs `--base /<repo name>/`; the workflow sets this for you. Also check that **Settings → Pages → Source** is **GitHub Actions**. |
+| The Pages site still shows an old version | Check that the latest run in the **Actions** tab finished, then hard-refresh (`Ctrl+Shift+R`). |
 
 ## Contributing
 

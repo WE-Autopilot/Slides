@@ -1,0 +1,60 @@
+# Builds the AGM deck and publishes it to GitHub Pages on every push to main.
+# Site: https://<org>.github.io/<repo>/  (e.g. https://we-autopilot.github.io/Slides/)
+#
+# One-time setup on GitHub: Settings → Pages → Build and deployment →
+# Source: "GitHub Actions". You can also run it by hand from the Actions tab.
+name: Deploy slides to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  # The deck to publish. Change this to host a different deck.
+  DECK: agm2026.md
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Pages serves the site from /<repo>/, so assets need that base path
+      - run: npx slidev build "$DECK" --base "/${{ github.event.repository.name }}/"
+
+      # Slide URLs like /Slides/7 aren't real files; Pages serves 404.html for
+      # them, so make that the app too (refreshing on any slide then works)
+      - run: cp dist/index.html dist/404.html
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

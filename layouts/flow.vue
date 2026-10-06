@@ -24,7 +24,6 @@
 -->
 <script setup lang="ts">
 import { computed } from 'vue'
-import { resolveAssetUrl } from '@slidev/client'
 
 interface Step { label: string, term?: string, note?: string, fill?: string, dashed?: boolean, mark?: boolean }
 
@@ -58,7 +57,8 @@ const geo = computed(() => {
   return { n, imgX, x0, w, xs, cy, loopTop, bracketTop }
 })
 
-const imgSrc = computed(() => (props.image ? resolveAssetUrl(props.image) : undefined))
+// SketchFrame resolves the base path itself, so pass the raw path through
+const imgSrc = computed(() => props.image)
 const MARK = { at: 1, type: 'circle', color: '#7C5CDB', padding: 6 }
 </script>
 
