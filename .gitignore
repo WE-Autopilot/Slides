@@ -1,7 +1,35 @@
-node_modules
-.DS_Store
-dist
-*.local
-.vite-inspect
-.remote-assets
+# Dependencies
+node_modules/
+
+# Slidev / Vite build output and caches
+dist/
+.vite-inspect/
+.remote-assets/
 components.d.ts
+*.local
+
+# Exports (`slidev export` writes these next to the deck); share them via
+# Drive or the club's channels instead of committing them
+*-export.pdf
+*-export.pptx
+*-export/
+_check/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Environment / secrets
+.env
+.env.*
+
+# Per-user tool settings
+.claude/settings.local.json
+.idea/
+
+# OS and Windows-download junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*:Zone.Identifier
