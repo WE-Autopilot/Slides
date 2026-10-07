@@ -10,7 +10,7 @@
   imageNote: the vehicle            # optional, handwritten under the image
   steps:
     - { label: Sense, term: Sensors, note: raw data }
-    - { label: Perceive, term: Perception, note: …, mark: true }   # mark: circle it on click
+    - { label: Perceive, term: Perception, note: …, mark: true }   # mark: show a static circle
     - { label: Later, term: …, fill: none, dashed: true }
   loop: and round again            # optional
   brackets:                         # optional, step numbers start at 1
@@ -59,7 +59,6 @@ const geo = computed(() => {
 
 // SketchFrame resolves the base path itself, so pass the raw path through
 const imgSrc = computed(() => props.image)
-const MARK = { at: 1, type: 'circle', color: '#7C5CDB', padding: 6 }
 </script>
 
 <template>
@@ -97,8 +96,7 @@ const MARK = { at: 1, type: 'circle', color: '#7C5CDB', padding: 6 }
         :pad="'8px 10px'"
         :style="{ left: `${geo.xs[i]}px`, top: `${rowTop}px`, width: `${geo.w}px`, height: `${boxH}px` }"
       >
-        <b v-if="s.mark" v-mark="MARK">{{ s.label }}</b>
-        <b v-else>{{ s.label }}</b>
+        <b :class="{ 'sk-static-circle': s.mark }">{{ s.label }}</b>
         <span v-if="s.term" class="sk-flow-term">{{ s.term }}</span>
       </SketchBox>
       <div

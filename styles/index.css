@@ -690,3 +690,25 @@
 .sponsor-name { font-size: 34px; font-weight: 700; }
 .sponsor-solidworks { width: 340px; height: 110px; }
 .sponsor-robotshop { width: 350px; height: 117px; }
+
+
+/* Permanent annotations: no click registration or reveal states. */
+.sk-static-underline {
+  text-decoration-line: underline;
+  text-decoration-color: var(--purple);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 5px;
+  text-decoration-skip-ink: none;
+}
+.sk-static-circle {
+  position: relative;
+}
+.sk-static-circle::after {
+  content: '';
+  position: absolute;
+  inset: -6px -10px;
+  border: 3px solid var(--purple);
+  border-radius: 48% 52% 47% 53%;
+  transform: rotate(-4deg);
+  pointer-events: none;
+}
